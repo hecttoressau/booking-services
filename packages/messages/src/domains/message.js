@@ -1,15 +1,23 @@
-const { Schema } = require('mongoose');
+const { Schema, ObjectId } = require('mongoose');
 
 const connection = require('../drivers/mongodb/connection');
+const { Chat } = require('./chat');
 
 const Message = new Schema({
+  chatId: {
+    type: ObjectId,
+    required: true,
+    default: undefined,
+    ref: Chat,
+  },
+
   fromUserId: {
-    type: Number,
+    type: String,
     required: true,
   },
 
   toUserId: {
-    type: Number,
+    type: String,
     required: true,
   },
   message: {
